@@ -15,5 +15,10 @@
     "pip": "^0.0.1",
     "python3": "^0.0.1",
     "xhr2": "^0.2.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "semi": false
   }
 }
