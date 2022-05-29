@@ -23,6 +23,7 @@ const algodClient = new algosdk.Algodv2(token, baseServer, port)
     const note = enc.encode('My first transaction on Algo!')
     let amount = 100000 // equals .1 ALGO
     let sender = myAccount.addr
+    console.log('test')
 
     let txn = algosdk.makePaymentTxnWithSuggestedParamsFromObject({
       from: sender,

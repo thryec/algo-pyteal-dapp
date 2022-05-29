@@ -40,7 +40,6 @@ def approval_program():
         [Txn.on_completion() == OnComplete.DeleteApplication, handle_deleteapp],
         [Txn.on_completion() == OnComplete.NoOp, handle_noop]
     )
-
     return compileTeal(program, Mode.Application, version=5)
 
 def clear_state_program():
