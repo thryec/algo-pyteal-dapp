@@ -64,6 +64,7 @@ const App = () => {
         'Global State updated:',
         transactionResponse['global-state-delta']
       )
+      await getCount()
     }
   }
   const deduct = async () => {
@@ -109,7 +110,18 @@ const App = () => {
         'Global State updated:',
         transactionResponse['global-state-delta']
       )
+      await getCount()
     }
+  }
+
+  const getCount = async () => {
+    let applicationInfoResponse = await algodClient
+      .getApplicationByID(app_address)
+      .do()
+    let globalState = []
+    globalState = applicationInfoResponse['params']['global-state']
+    console.log('count is: ', globalState[0]['value']['uint'])
+    setGlobalCount(globalState[0]['value']['uint'])
   }
 
   const connectWallet = async () => {
@@ -199,6 +211,7 @@ const App = () => {
 
   useEffect(() => {
     checkIfWalletIsConnected()
+    getCount()
     console.log('currentAccount:', currentAccount)
   }, [currentAccount])
 
@@ -217,7 +230,7 @@ const App = () => {
         )}
         {currentAccount && (
           <>
-            <div className="count">Count #</div>
+            <div className="count">{globalCount}</div>
             <button className="mathButton" onClick={add}>
               Add
             </button>
