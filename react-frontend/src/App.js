@@ -8,12 +8,13 @@ require('dotenv').config()
 
 const App = () => {
   const [currentAccount, setCurrentAccount] = useState()
-  const [globalCount, setGlobalCount] = useState(0)
+  const [Count1, setCount1] = useState(0)
+  const [Count2, setCount2] = useState(0)
   const [walletbalance, setwalletbalance] = useState()
   const [connector, setConnector] = useState()
   const [connected, setConnected] = useState(false)
 
-  const app_address = 91704579
+  const app_address = 92604768
   const baseServer = 'https://testnet-algorand.api.purestake.io/ps2'
   const port = ''
   const token = {
@@ -21,11 +22,11 @@ const App = () => {
   }
   const algodClient = new algosdk.Algodv2(token, baseServer, port)
 
-  const add = async () => {
+  const addC1 = async () => {
     // construct transaction
     let sender = currentAccount
     let appArgs = []
-    appArgs.push(new Uint8Array(Buffer.from('Add')))
+    appArgs.push(new Uint8Array(Buffer.from('AddC1')))
     let params = await algodClient.getTransactionParams().do()
     const txn = algosdk.makeApplicationNoOpTxn(
       sender,
@@ -67,11 +68,12 @@ const App = () => {
       await getCount()
     }
   }
-  const deduct = async () => {
+
+  const addC2 = async () => {
     // construct transaction
     let sender = currentAccount
     let appArgs = []
-    appArgs.push(new Uint8Array(Buffer.from('Deduct')))
+    appArgs.push(new Uint8Array(Buffer.from('AddC1')))
     let params = await algodClient.getTransactionParams().do()
     const txn = algosdk.makeApplicationNoOpTxn(
       sender,
@@ -120,8 +122,10 @@ const App = () => {
       .do()
     let globalState = []
     globalState = applicationInfoResponse['params']['global-state']
-    console.log('count is: ', globalState[0]['value']['uint'])
-    setGlobalCount(globalState[0]['value']['uint'])
+    console.log('Count1: ', globalState[0]['value']['uint'])
+    setCount1(globalState[0]['value']['uint'])
+    console.log('Count2: ', globalState[1]['value']['uint'])
+    setCount2(globalState[1]['value']['uint'])
   }
 
   const connectWallet = async () => {
@@ -220,8 +224,7 @@ const App = () => {
       <div className="dataContainer">
         <div className="header">🤪 Yooooo!</div>
         <div className="bio">
-          Antony here. I'm happy you made it this far! You're well on your way
-          to creating your first dapp on Algorand!
+          Antony here. Trying to settle a debate. Vote on the better song.
         </div>
         {!currentAccount && (
           <button className="mathButton" onClick={connectWallet}>
@@ -230,12 +233,13 @@ const App = () => {
         )}
         {currentAccount && (
           <>
-            <div className="count">{globalCount}</div>
-            <button className="mathButton" onClick={add}>
-              Add
+            <div className="count">Mr. Brightside: {Count1}</div>
+            <div className="count">Pursuit of Happiness: {Count2}</div>
+            <button className="mathButton" onClick={addC1}>
+              Vote for Mr. Brightside
             </button>
-            <button className="mathButton" onClick={deduct}>
-              Deduct
+            <button className="mathButton" onClick={addC2}>
+              Vote for Pursuit of Happiness
             </button>
             <button className="mathButton" onClick={disconnectWallet}>
               Disconnect Wallet
