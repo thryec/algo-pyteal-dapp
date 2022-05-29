@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "languages": {
+    "nodejs-npm": {
+      "specfileHash": "b203779932546a913235f07942a932f4",
+      "lockfileHash": "3e7b79ce4f448bf461d75f95962acf64",
+      "guessedImports": [
+        "react",
+        "react-dom",
+        "@walletconnect/client",
+        "algorand-walletconnect-qrcode-modal",
+        "algosdk",
+        "@json-rpc-tools/utils"
+      ],
+      "guessedImportsHash": "166a11b8afd9aa9b1d37c81e702a3691"
+    }
+  }
+}
